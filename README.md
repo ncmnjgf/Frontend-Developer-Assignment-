@@ -17,9 +17,7 @@
 ![Dashboard](./public/screenshots/dashboard.png)
 *Stat cards, quick actions panel, and recently added employees list*
 
-### Employee Management
-![Employees](./public/screenshots/employees.png)
-*Searchable, filterable employee table with avatar initials, country badges, and action buttons*
+
 
 ### Add Employee
 ![Add Employee](./public/screenshots/add-employee.png)
