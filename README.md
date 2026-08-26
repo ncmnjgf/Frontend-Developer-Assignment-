@@ -17,8 +17,6 @@
 ![Dashboard](./public/screenshots/dashboard.png)
 *Stat cards, quick actions panel, and recently added employees list*
 
-
-
 ### Add Employee
 ![Add Employee](./public/screenshots/add-employee.png)
 *Validated 2-column form with React Hook Form + Yup*
