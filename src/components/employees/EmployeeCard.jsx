@@ -43,7 +43,9 @@ const EmployeeCard = ({ employee, onDelete }) => {
           <span className="employee-id-badge">#{employee.id}</span>
         </div>
         {employee.country && (
-          <span className="badge badge-primary">{employee.country}</span>
+          <span className="badge badge-primary">
+            {employee.country.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')}
+          </span>
         )}
       </div>
 

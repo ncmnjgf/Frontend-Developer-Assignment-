@@ -70,8 +70,8 @@ const Dashboard = () => {
             value={employees.length}
             trend="up"
             trendLabel="Active workforce"
-            color="#6366f1"
-            bgColor="#eef2ff"
+            color="#8b5cf6"
+            bgColor="rgba(139, 92, 246, 0.15)"
           />
           <StatCard
             icon={<PublicRoundedIcon sx={{ fontSize: 24 }} />}
@@ -80,7 +80,7 @@ const Dashboard = () => {
             trend="neutral"
             trendLabel="Nationalities present"
             color="#06b6d4"
-            bgColor="#ecfeff"
+            bgColor="rgba(6, 182, 212, 0.15)"
           />
           <StatCard
             icon={<GroupsRoundedIcon sx={{ fontSize: 24 }} />}
@@ -89,87 +89,52 @@ const Dashboard = () => {
             trend="up"
             trendLabel="Last 5 records"
             color="#10b981"
-            bgColor="#d1fae5"
+            bgColor="rgba(16, 185, 129, 0.15)"
           />
         </Box>
       )}
 
       {/* Quick action & Recent Employees */}
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 2fr' }, gap: 3 }}>
-        {/* Quick Actions Card */}
+        {/* Employee Distribution Card */}
         <div className="card">
           <div className="card-header">
-            <h2 className="card-title">Quick Actions</h2>
+            <h2 className="card-title">Top Countries</h2>
           </div>
           <div className="card-body">
-            {[
-              {
-                label: 'Add New Employee',
-                desc: 'Create a new employee record',
-                icon: <PersonAddRoundedIcon sx={{ fontSize: 20 }} />,
-                to: '/add-employee',
-                color: 'var(--color-primary)',
-                bg: 'var(--color-primary-50)',
-              },
-              {
-                label: 'View All Employees',
-                desc: 'Browse and manage employees',
-                icon: <PeopleRoundedIcon sx={{ fontSize: 20 }} />,
-                to: '/employees',
-                color: '#06b6d4',
-                bg: '#ecfeff',
-              },
-              {
-                label: 'Search Employee',
-                desc: 'Find employee by ID',
-                icon: <GroupsRoundedIcon sx={{ fontSize: 20 }} />,
-                to: '/search',
-                color: '#10b981',
-                bg: '#d1fae5',
-              },
-            ].map((item) => (
-              <Box
-                key={item.to}
-                role="button"
-                tabIndex={0}
-                onClick={() => navigate(item.to)}
-                onKeyDown={(e) => e.key === 'Enter' && navigate(item.to)}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.5,
-                  p: 1.5,
-                  borderRadius: 2,
-                  cursor: 'pointer',
-                  mb: 0.5,
-                  transition: 'background var(--transition-fast)',
-                  '&:hover': { bgcolor: 'var(--color-surface-2)' },
-                }}
-                aria-label={item.label}
-              >
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 2,
-                    bgcolor: item.bg,
-                    color: item.color,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  {item.icon}
-                </Box>
-                <Box>
-                  <Box sx={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                    {item.label}
+            {Object.entries(
+              employees.reduce((acc, emp) => {
+                const country = emp.country
+                  ? emp.country.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+                  : 'Unknown';
+                acc[country] = (acc[country] || 0) + 1;
+                return acc;
+              }, {})
+            )
+              .sort((a, b) => b[1] - a[1])
+              .slice(0, 5)
+              .map(([country, count], idx) => {
+                const percentage = Math.round((count / Math.max(employees.length, 1)) * 100);
+                const colors = ['#0ea5e9', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'];
+                const color = colors[idx % colors.length];
+
+                return (
+                  <Box key={country} sx={{ mb: 2.5 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                      <Box sx={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)' }}>{country}</Box>
+                      <Box sx={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>{count} ({percentage}%)</Box>
+                    </Box>
+                    <Box sx={{ width: '100%', height: 6, bgcolor: 'var(--color-surface-2)', borderRadius: 4, overflow: 'hidden' }}>
+                      <Box sx={{ width: `${percentage}%`, height: '100%', bgcolor: color, borderRadius: 4 }} />
+                    </Box>
                   </Box>
-                  <Box sx={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>{item.desc}</Box>
-                </Box>
+                );
+              })}
+            {employees.length === 0 && (
+              <Box sx={{ color: 'var(--color-text-tertiary)', fontSize: 14, textAlign: 'center', py: 4 }}>
+                No data available
               </Box>
-            ))}
+            )}
           </div>
         </div>
 

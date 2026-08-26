@@ -79,7 +79,7 @@ const EmployeeDetailsComponent = ({ employee, onDelete }) => {
         Back to Employees
       </Button>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 2fr' }, gap: 3 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 2fr' }, gap: 3, alignItems: 'start' }}>
         {/* Profile card */}
         <Box className="card">
           <Box sx={{ p: 3, textAlign: 'center', borderBottom: '1px solid var(--color-border-light)' }}>

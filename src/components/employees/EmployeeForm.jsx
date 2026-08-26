@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useNavigate } from 'react-router-dom';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -89,7 +89,10 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
               id="employee-name"
               error={!!errors.name}
               helperText={errors.name?.message}
-              inputProps={{ 'aria-required': 'true', maxLength: 50 }}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { 'aria-required': 'true', maxLength: 50 },
+              }}
               placeholder="e.g. John Doe"
             />
           )}
@@ -107,7 +110,10 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
               type="email"
               error={!!errors.email}
               helperText={errors.email?.message}
-              inputProps={{ 'aria-required': 'true' }}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { 'aria-required': 'true' },
+              }}
               placeholder="e.g. john@company.com"
             />
           )}
@@ -123,8 +129,11 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
               label="Mobile Number"
               id="employee-mobile"
               error={!!errors.mobile}
-              helperText={errors.mobile?.message || '10 digits only'}
-              inputProps={{ 'aria-required': 'true', maxLength: 10, inputMode: 'numeric' }}
+              helperText={errors.mobile?.message}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { 'aria-required': 'true', maxLength: 10, inputMode: 'numeric' },
+              }}
               placeholder="e.g. 9876543210"
             />
           )}
@@ -144,11 +153,16 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
                 label="Country"
                 aria-required="true"
               >
-                {countries.map((c) => (
-                  <MenuItem key={c.id} value={c.name}>
-                    {c.name}
-                  </MenuItem>
-                ))}
+                {countries.map((c) => {
+                  const countryName = c.country
+                    ? c.country.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+                    : 'Unknown';
+                  return (
+                    <MenuItem key={c.id} value={c.country}>
+                      {countryName}
+                    </MenuItem>
+                  );
+                })}
               </Select>
               {errors.country && <FormHelperText>{errors.country.message}</FormHelperText>}
             </FormControl>
@@ -166,7 +180,10 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
               id="employee-state"
               error={!!errors.state}
               helperText={errors.state?.message}
-              inputProps={{ 'aria-required': 'true', maxLength: 50 }}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { 'aria-required': 'true', maxLength: 50 },
+              }}
               placeholder="e.g. Maharashtra"
             />
           )}
@@ -183,7 +200,10 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
               id="employee-district"
               error={!!errors.district}
               helperText={errors.district?.message}
-              inputProps={{ 'aria-required': 'true', maxLength: 50 }}
+              slotProps={{
+                inputLabel: { shrink: true },
+                htmlInput: { 'aria-required': 'true', maxLength: 50 },
+              }}
               placeholder="e.g. Mumbai"
             />
           )}
@@ -195,7 +215,7 @@ const EmployeeForm = ({ defaultValues = {}, countries = [], onSubmit, loading = 
         <Button
           type="button"
           variant="outlined"
-          startIcon={<ArrowBackRoundedIcon />}
+          startIcon={<CloseRoundedIcon />}
           onClick={() => navigate(-1)}
           disabled={loading}
           sx={{

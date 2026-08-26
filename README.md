@@ -7,7 +7,7 @@
 [![Vitest](https://img.shields.io/badge/Vitest-Tests_Passing-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-> A modern, responsive **Employee Management System** built with React, Redux Toolkit, Material UI, and REST APIs. Designed as a professional SaaS-grade admin dashboard.
+> A modern, responsive **Employee Management System** built with React, Redux Toolkit, Material UI, and REST APIs. Designed as a professional SaaS-grade admin dashboard with a premium dark mode UI.
 
 ---
 
@@ -41,15 +41,17 @@
 - 🌍 **Country API Integration** — Countries dynamically fetched from REST API
 - ✅ **Form Validation** — React Hook Form + Yup with field-level error messages
 - 🧩 **Redux Toolkit State Management** — Slices, async thunks, selectors
-- 📊 **Responsive Dashboard** — Stat cards, quick actions, recent employees
+- 📊 **Responsive Dashboard** — Stat cards, Top Countries widget, recent employees
 - 💀 **Skeleton Loaders** — Table and card skeleton loaders during data fetching
 - ⚠️ **Error States** — Descriptive error messages with retry capability
 - 🫙 **Empty States** — Helpful prompts when no data exists
+- 📄 **Pagination** — Client-side pagination (15 items per page) for optimal performance
 - 🗑️ **Delete Confirmation** — Never immediately delete, always confirm first
 - 🍞 **Toast Notifications** — Success/error feedback for all CRUD operations
 - 🧾 **Employee Details View** — Dedicated detail page with profile card
 - 📱 **Responsive UI** — Sidebar for desktop, drawer for mobile; cards for mobile table
 - ♿ **Accessibility** — ARIA labels, focus states, semantic HTML, keyboard navigation
+- 🌙 **Premium Dark Theme** — Polished, high-contrast UI tailored for modern SaaS apps
 - 🧪 **Unit Testing** — 33 tests across services, Redux slices, and components
 
 ---
@@ -296,12 +298,10 @@ git push -u origin main
 
 - 🔐 Authentication & JWT-based login
 - 🎭 Role-based access control (Admin / HR / Viewer)
-- 📄 Pagination for large employee lists
 - 🔎 Advanced filtering (date range, department)
 - 📸 Employee profile photo upload
 - 📊 Analytics charts (department breakdown, growth)
 - 📥 Export employees to CSV / Excel
-- 🌙 Dark mode toggle
 - 🔔 Email notification on employee events
 - 🚀 Backend integration with MongoDB / PostgreSQL
 - ☁️ Deployment to Vercel / Netlify / AWS

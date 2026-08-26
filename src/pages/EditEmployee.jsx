@@ -71,13 +71,17 @@ const EditEmployee = () => {
           <h2 className="card-title">Employee Information</h2>
         </div>
         <div className="card-body">
-          {employee && (
+          {employee && countries.length > 0 && (
             <EmployeeForm
               defaultValues={{
                 name: employee.name || '',
                 email: employee.email || '',
                 mobile: employee.mobile || '',
-                country: employee.country || '',
+                country: (
+                  countries.find(
+                    (c) => c?.country && (employee?.country || '').toLowerCase() === c.country.toLowerCase()
+                  )?.country || employee?.country || ''
+                ),
                 state: employee.state || '',
                 district: employee.district || '',
               }}

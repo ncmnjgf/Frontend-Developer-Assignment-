@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
+import TablePagination from '@mui/material/TablePagination';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -38,6 +39,8 @@ const Employees = () => {
 
   const [search, setSearch] = useState('');
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [page, setPage] = useState(0);
+  const rowsPerPage = 15;
 
   useEffect(() => {
     dispatch(fetchEmployees());
@@ -54,6 +57,12 @@ const Employees = () => {
         String(e.id).includes(q)
     );
   }, [employees, search]);
+
+  const handleChangePage = (event, newPage) => setPage(newPage);
+
+  const paginatedEmployees = useMemo(() => {
+    return filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  }, [filtered, page, rowsPerPage]);
 
   const handleDeleteRequest = (emp) => setDeleteTarget(emp);
   const handleDeleteCancel = () => setDeleteTarget(null);
@@ -85,13 +94,13 @@ const Employees = () => {
     if (isMobile) {
       return (
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
-          {filtered.map((emp) => (
+          {paginatedEmployees.map((emp) => (
             <EmployeeCard key={emp.id} employee={emp} onDelete={handleDeleteRequest} />
           ))}
         </Box>
       );
     }
-    return <EmployeeTable employees={filtered} onDelete={handleDeleteRequest} />;
+    return <EmployeeTable employees={paginatedEmployees} onDelete={handleDeleteRequest} />;
   };
 
   return (
@@ -132,7 +141,24 @@ const Employees = () => {
         />
       </Box>
 
-      <div className="card">{renderContent()}</div>
+      <div className="card">
+        {renderContent()}
+        {filtered.length > 0 && (
+          <TablePagination
+            component="div"
+            count={filtered.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOptions={[15]}
+            sx={{
+              borderTop: '1px solid var(--color-border)',
+              color: 'var(--color-text-secondary)',
+              '.MuiTablePagination-selectIcon': { color: 'var(--color-text-tertiary)' },
+            }}
+          />
+        )}
+      </div>
 
       <ConfirmDialog
         open={!!deleteTarget}

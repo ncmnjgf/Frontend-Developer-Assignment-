@@ -2,28 +2,28 @@
 
 /* ─── CSS Custom Properties ──────────────────────────────────────────────── */
 :root {
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-primary-50: #eef2ff;
-  --color-primary-100: #e0e7ff;
-  --color-secondary: #06b6d4;
+  --color-primary: #7dd3fc;
+  --color-primary-light: #bae6fd;
+  --color-primary-dark: #0284c7;
+  --color-primary-50: rgba(125, 211, 252, 0.1);
+  --color-primary-100: rgba(125, 211, 252, 0.2);
+  --color-secondary: #0ea5e9;
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-surface-2: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-border-light: #f1f5f9;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #64748b;
-  --color-text-tertiary: #94a3b8;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 0 3px rgb(99 102 241 / 0.15);
+  --color-bg: #0b0d14;
+  --color-surface: #181b28;
+  --color-surface-2: #212536;
+  --color-border: #3b425e;
+  --color-border-light: #2c3147;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.8), 0 4px 6px -4px rgb(0 0 0 / 0.8);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.8), 0 8px 10px -6px rgb(0 0 0 / 0.8);
+  --shadow-glow: 0 0 0 3px rgb(125 211 252 / 0.15);
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -197,14 +197,16 @@ body {
 }
 
 .sidebar-nav-item:hover {
-  background: var(--color-primary-50);
-  color: var(--color-primary);
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
 }
 
 .sidebar-nav-item.active {
-  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
-  color: var(--color-primary-dark);
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
   font-weight: 600;
+  border-left: 2px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
 .sidebar-nav-item.active .sidebar-nav-icon {
@@ -444,7 +446,7 @@ body {
 }
 
 .employee-table tbody tr:hover {
-  background: var(--color-primary-50);
+  background: var(--color-surface-2);
 }
 
 .employee-avatar {
@@ -475,7 +477,7 @@ body {
 .employee-id-badge {
   display: inline-flex;
   align-items: center;
-  background: var(--color-surface-2);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   font-size: 11px;
@@ -501,9 +503,9 @@ body {
 }
 
 .action-btn:hover { transform: scale(1.05); }
-.action-btn.view:hover { background: var(--color-primary-50); border-color: var(--color-primary-light); color: var(--color-primary); }
-.action-btn.edit:hover { background: #fffbeb; border-color: #fbbf24; color: #d97706; }
-.action-btn.delete:hover { background: #fef2f2; border-color: #fca5a5; color: var(--color-error); }
+.action-btn.view:hover { background: var(--color-surface-2); border-color: var(--color-primary-light); color: var(--color-primary); }
+.action-btn.edit:hover { background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.3); color: #fbbf24; }
+.action-btn.delete:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: var(--color-error); }
 
 /* ─── Badges ─────────────────────────────────────────────────────────────── */
 .badge {

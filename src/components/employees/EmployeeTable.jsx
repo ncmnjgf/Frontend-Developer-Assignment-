@@ -75,7 +75,11 @@ const EmployeeTable = ({ employees, onDelete }) => {
                 {emp.mobile}
               </td>
               <td>
-                <span className="badge badge-primary">{emp.country || '—'}</span>
+                <span className="badge badge-primary">
+                  {emp.country
+                    ? emp.country.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')
+                    : '—'}
+                </span>
               </td>
               <td style={{ color: 'var(--color-text-secondary)', fontSize: 13 }}>
                 {[emp.district, emp.state].filter(Boolean).join(', ') || '—'}
